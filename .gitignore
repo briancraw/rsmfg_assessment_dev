@@ -1,0 +1,6 @@
+electron/rsmfg_project/electron-builder.yml
+electron/rsmfg_project/node_modules
+electron/rsmfg_project/dist
+electron/rsmfg_project/installers
+electron/rsmfg_project/release-builds
+electron/rsmfg_project/package.json.old
