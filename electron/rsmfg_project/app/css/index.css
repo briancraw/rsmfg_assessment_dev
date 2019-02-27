@@ -262,3 +262,19 @@ display: block;
 	padding-top: 5px;
 	font-size: 16px;
 } */
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  margin: 4px auto;
+  cursor: pointer;
+  border: solid black;
+}
+
+.button_green {background-color: green; border-radius: 50%;}
+.button_red {background-color: red; border-radius: 50%;}

@@ -112,6 +112,7 @@ const template = [
   {
     label: "Serial",
     submenu: [
+      /*
       {
         label: 'Program Table',
         click(item, focusedWindow) {
@@ -124,6 +125,7 @@ const template = [
           if (focusedWindow) focusedWindow.webContents.send('closeSerial', null);
         }
       },
+      */
     ]
   },
 

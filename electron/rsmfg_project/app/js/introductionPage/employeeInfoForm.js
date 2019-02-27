@@ -14,6 +14,7 @@ function employeeInfoForm() {
   sessionStorage[ssn] = "";
   sessionStorage[date] = "";
   sessionStorage[employeeNum] = "";
+  sessionStorage[branch] = "";
 
   formName.innerHTML = "";
   formEntry.innerHTML = "";
@@ -28,6 +29,8 @@ function employeeInfoForm() {
   createFormField(date, formEntry);
   createSelectTextElement(employeeNum+":", formName);
   createFormField(employeeNum, formEntry);
+  createSelectTextElement(branch+":", formName);
+  createFormField(branch, formEntry);
 } // employeeInfoForm
 
 function validateEntries() {
@@ -36,6 +39,7 @@ function validateEntries() {
   let dateRegExp = /^(\d?\d)\/(\d?\d)\/(\d\d\d\d)$/;
   let ssnRegExp = /^(\d){4}$/;
   let nameRegExp = /^[a-zA-z]+$/;
+  let branchRegExp = /^\d{5}$/;
   let t;
 
   infoHeading.innerHTML = "";
@@ -89,6 +93,16 @@ function validateEntries() {
   if (isBlank(sessionStorage[employeeNum])) {
     console.log("EMP NUM BLANK " + sessionStorage[employeeNum]);
     form_incomplete = true;
+  }
+
+  if (isBlank(sessionStorage[branch])) {
+    form_incomplete = true;
+    sessionStorage[branch] = "";
+  } else if (!branchRegExp.test(sessionStorage[branch])) {
+    form_invalid = true;
+    t = createElementAndText("P", "Branch must be a 5 digit number", "instruction-text", infoHeading);
+    t.setAttribute("style", "color:red; text-align:center");
+    document.getElementById("window-content").style.backgroundColor = "lightgray";
   }
 
   if (form_incomplete) {

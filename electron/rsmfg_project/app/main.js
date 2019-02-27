@@ -66,7 +66,7 @@ var { dialog } = require('electron');
 
 autoUpdater.on('update-downloaded', (info) => {
     //win.webContents.send('updateReady');
-  var detailString = "Version " + info.version + " has been downloaded." + "\n" + "The Application will now restart..."
+  //var detailString = "Version " + info.version + " has been downloaded." + "\n" + "The Application will now restart..."
   autoUpdater.quitAndInstall();
 /*
   const dialogOpts = {

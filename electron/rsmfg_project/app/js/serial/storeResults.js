@@ -54,6 +54,9 @@ function parseDataFile(filePath, defaults) {
   }
 }
 
+// expose the class
+//module.exports = Store;
+
 // First instantiate the class
 const store = new Store({
   // We'll call our data file 'user-preferences'

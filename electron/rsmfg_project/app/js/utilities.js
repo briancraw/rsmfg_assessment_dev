@@ -121,6 +121,7 @@ function createFormEntry(text, element) {
   });
 } // createFormEntry
 
+/*
 function updateBranchSelectMenu(state) {
   let selections = document.getElementById("Branch_select");
   if (locations.hasOwnProperty(state)) {
@@ -135,6 +136,7 @@ function updateBranchSelectMenu(state) {
     console.log("ERROR: "+state+" is not a valid selection!");
   }
 } // updateBranchSelectMenu
+*/
 
 function createSelectMenu(text, list, element) {
   let selections = document.createElement("SELECT");
@@ -162,9 +164,11 @@ function createSelectMenu(text, list, element) {
     }
     input.onchange = function () {
       sessionStorage[text] = this.value;
+      /*
       if (text == "State") {
         updateBranchSelectMenu(this.value);
       }
+      */
     }
   });
 } // createSelectMenu
@@ -177,7 +181,7 @@ function reportNotConnected() {
   let alertDiv;
   alertDiv = document.getElementById("alertMessage");
   if (alertDiv == null) {
-    infoHeading.innerHTML = "";
+    wc.innerHTML = "";
     alertDiv = document.createElement("DIV");
     alertDiv.className = "alert";
     alertDiv.setAttribute("id", "alertMessage");
@@ -185,7 +189,7 @@ function reportNotConnected() {
     let t = document.createTextNode("No Assessment Table detected. Any collected Assessment data may be invalid."+"\n"+
                                      "Please connect the USB cable from the table and click Restart to restart the application.");
     alertDiv.appendChild(t);
-    infoHeading.appendChild(alertDiv);
+    wc.appendChild(alertDiv);
 
     let btnDiv = document.createElement("DIV");
     btnDiv.className = "form-button-div";
@@ -197,10 +201,11 @@ function reportNotConnected() {
     t = document.createTextNode("Restart");
     btn.appendChild(t);
     btnDiv.appendChild(btn);
-    infoHeading.appendChild(btnDiv);
-    topHeading.style.visibility = "hidden";
-    wc.style.visibility = "hidden";
-    footer.style.visibility = "hidden";
+    wc.appendChild(btnDiv);
+    //topHeading.style.visibility = "hidden";
+    //wc.style.visibility = "hidden";
+    //footer.style.visibility = "hidden";
+    footer.innerHTML = "";
   } else {
     //alertDiv.remove();
     //alertDiv.innerHTML = "";

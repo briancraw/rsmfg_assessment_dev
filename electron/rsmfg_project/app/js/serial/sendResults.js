@@ -48,7 +48,6 @@ function reportUploadFailed() {
 
     infoHeading.appendChild(btnDiv);
   }
-
 } //reportUploadFailed
 
 function displayUploadSuccessMessage() {
@@ -120,7 +119,7 @@ function retryUpload(count) {
           reportUploadFailed();
           console.log("Failed to upload on retry attempt #" + retryCount);
         })
-      }, 2000)
+      }, 5000)
   ));
     if (successful == true) {break;}
   }
@@ -128,6 +127,7 @@ function retryUpload(count) {
 
 function sendResults() {
   let successful = false;
+  setTimeout(function() {
   sendResultsToQualtrics()
     .then(function(r) {
       successful = true;
@@ -135,11 +135,13 @@ function sendResults() {
       return true;
     })
     .catch(function(r) {
+      reportUploadFailed();
       console.log("Upload error response: " + r);
       if (successful == false) {
         retryUpload(3);
       }
     })
+  }, 10000)
 } // sendResults()
 
 function sendResultsToQualtrics() {
@@ -166,7 +168,8 @@ function sendResultsToQualtrics() {
       "EmployeeNumber":sessionStorage[employeeNum],
       "AssemblyScore":scores.a1.total.toString(),
       "InspectionScore":scores.a2.total.toString(),
-      "TroubleshootingScore":scores.a3.total.toString()
+      "TroubleshootingScore":scores.a3.total.toString(),
+      "BranchNumber":sessionStorage[branch]
     }
   };
 

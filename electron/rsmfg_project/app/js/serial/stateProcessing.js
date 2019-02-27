@@ -52,12 +52,13 @@ var scores = {
 } // scores
 
 function parseSerial(data) {
-  console.log("Received: " + data);
+//  console.log("Received: " + data);
   processState(data);
 }
 
 const responseRegExp = /(?<cmd>\w+):? ?(?<resp>.*)/;
 const tableVersionRegExp = /Starting RSMFG skills assessment test version (?<tableVersionMaj>\d+)\.(?<tableVersionMid>\d+)\.(?<tableVersionMin>\d+)/;
+const pwmRegExp = /(?<id>\d+):PWM:(?<val>\w+)/;
 
 function checkForTableUpdate(str) {
     if (match = tableVersionRegExp.exec(str)) {
@@ -199,6 +200,11 @@ function processState(data) {
           sendSerial(CMDS.RST);
         }
       }
+      /*
+      if (match = pwmRegExp.exec(d)) {
+        updateA3Status("w"+match.groups.id, match.groups.val);
+      }
+      */
       break;
     case STATES.COMPLETE:
       if (d == CMDS.RST) {

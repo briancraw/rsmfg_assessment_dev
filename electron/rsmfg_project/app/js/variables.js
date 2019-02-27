@@ -13,9 +13,14 @@ const {autoUpdater} = require("electron-updater");
 const path = require("path");
 const url = require("url");
 */
-var TABLE_CONNECTED = false;
-
+//var TABLE_CONNECTED = false;
 var NO_TABLE = false;
+var currentTableVersion = "";
+const latestTableVersionMaj = "1";
+const latestTableVersionMid = "0";
+const latestTableVersionMin = "2";
+var updateTable = false;
+
 var SERIAL_DEBUG = false;
 
 var MINUTE = 60000; // 1 minute;
@@ -79,11 +84,6 @@ var remainingTime = {
 };
 //var waiting = true;
 
-var currentTableVersion = "";
-const latestTableVersionMaj = "1";
-const latestTableVersionMid = "0";
-const latestTableVersionMin = "1";
-var updateTable = false;
 //localStorage["tableUpdated"] = false;
 
 var firstName = 'First Name';
@@ -91,12 +91,14 @@ var lastName = 'Last Name';
 var ssn = 'Last 4 digits of SSN';
 var date = 'Date (MM/DD/YYYY)';
 var employeeNum = 'Employee Number';
+var branch = "Branch Number";
 
 sessionStorage[firstName] = "";
 sessionStorage[lastName] = "";
 sessionStorage[ssn] = "";
 sessionStorage[date] = "";
 sessionStorage[employeeNum] = "";
+sessionStorage[branch] = "";
 
 sessionStorage["BOM"] = "";
 sessionStorage["len"] = "";

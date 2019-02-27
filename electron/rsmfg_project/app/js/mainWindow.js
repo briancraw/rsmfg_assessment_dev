@@ -26,29 +26,17 @@ function reportDownloadInProgress() {
 // wait for an updateReady message
 ipcRenderer.on('updateAvailable', function(event, text) {
   reportDownloadInProgress();
- });
+});
 
-
- ipcRenderer.on('programTable', function(event, text) {
-   if (updateTable) {
-     port.close(programTable(portName));
-   }
- });
+ipcRenderer.on('programTable', function(event, text) {
+  port.close(programTable(portName));
+});
 
 ipcRenderer.on('closeSerial', function(event, text) {
   port.close(programTable(portName));
-  //port.close();
 });
 
 connectToTable();
-
-const isDev = require('electron-is-dev');
-
-if (isDev) {
-  console.log('Running in development');
-} else {
-  console.log('Running in production');
-}
 
 if (SERIAL_DEBUG == true) {
   serialDebugBox("Serial CMD");

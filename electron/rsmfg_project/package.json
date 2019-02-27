@@ -1,28 +1,27 @@
 {
   "name": "rsmfg-assessment-app",
   "productName": "ResourceMFG Assessment Application(DEV)",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "ResourceMFG Practical Assembly Assessment",
   "main": "app/main.js",
-  "repository": "https://github.com/briancraw/rsmfg_assessment",
+  "repository": "https://github.com/briancraw/rsmfg_assessment_dev",
+  "postinstall": "electron-builder install-app-deps",
   "scripts": {
     "build": "build --win",
     "ship": "build --win -p always",
     "publish": "build -p always",
-    "start": "electron .",
-    "install": "electron-rebuild",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "package-win": "electron-packager . rsmfg-assessment-app --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=release-builds --version-string.CompanyName=RSMFG --version-string.FileDescription=RSMFG_Assessment_App --version-string.ProductName=\"RSMFG Assessment Application\"",
-    "create-installer-win": "node installers/windows/createinstaller.js"
+    "start": "electron ."
   },
   "build": {
     "appId": "RSMFG_Assessment_App",
     "productName": "Resource MFG Assessment Application(DEV)",
     "win": {
       "icon": "build/icon.ico"
-    }
+    },
+    "extraFiles": [
+      "build/"
+    ]
   },
-  "files": ["./build"],
   "author": "Brian Craw",
   "license": "ISC",
   "dependencies": {

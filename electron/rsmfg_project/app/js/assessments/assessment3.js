@@ -19,6 +19,7 @@ function startAssessment3() {
                            "instruction-text", preformContent);
   t.setAttribute("style", "font-size: 22px; font-weight: bold; text-align: center");
 
+  //displayA3Status();
   startTableAssessment3();
 } // startAssessment3()
 
@@ -28,4 +29,27 @@ function startTableAssessment3() {
   } else {
     sendSerial(CMDS.SA3);
   }
+}
+
+function displayA3Status() {
+  let b = createElementAndText("button", "W1", "button button_red", wc);
+  b.setAttribute("id", "w1");
+  wc.appendChild(b);
+  b = createElementAndText("button", "W2", "button button_red", wc);
+  b.setAttribute("id", "w2");
+  wc.appendChild(b);
+  b = createElementAndText("button", "W3", "button button_red", wc);
+  b.setAttribute("id", "w3");
+  wc.appendChild(b);
+  b = createElementAndText("button", "W4", "button button_red", wc);
+  b.setAttribute("id", "w4");
+  wc.appendChild(b);
+  b = createElementAndText("button", "W5", "button button_red", wc);
+  b.setAttribute("id", "w5");
+  wc.appendChild(b);
+}
+
+function updateA3Status(id, val) {
+   let b = document.getElementById(id);
+   b.className = "button " + "button_"+val;
 }

@@ -55,73 +55,92 @@ function captureTime(assessment) {
 function calculateA1Score() {
   let score = 0;
   let numAnswers = 8;
+  let points = 0;
+
   if (sessionStorage["BOM"] == bomAnswer) {
     score = score + 5;
+    points = 5;
   }
-  console.log("BOM SCORE: " + score);
-
-  if (sessionStorage["width1"] == width1Answer) {
-    if (sessionStorage["width1_fractions"] == width1_fractionsAnswer) {
-      score = score + 1;
-    }
-  }
-  console.log("WIDTH1 SCORE: " + score);
-
-  if (sessionStorage["width2"] == width2Answer) {
-    if (sessionStorage["width2_fractions"] == width2_fractionsAnswer) {
-      score = score + 1;
-    }
-  }
-  console.log("WIDTH2 SCORE: " + score);
+  console.log("A1 BOM SCORE: " + points + " of 5,  TOTAL: " + score);
+  points = 0;
 
   if (sessionStorage["len"] == lenAnswer) {
     if (sessionStorage["len_fractions"] == len_fractionsAnswer) {
       score = score + 1;
+      points = 1;
     }
   }
-  console.log("LEN SCORE: " + score);
+  console.log("A1 LEN SCORE: " + points + " of 1, TOTAL: " + score);
+  points = 0;
+
+  if (sessionStorage["width1"] == width1Answer) {
+    if (sessionStorage["width1_fractions"] == width1_fractionsAnswer) {
+      score = score + 1;
+      points = 1;
+    }
+  }
+  console.log("A1 WIDTH1 SCORE: " + points + " of 1, TOTAL: " + score);
+  points = 0;
+
+  if (sessionStorage["width2"] == width2Answer) {
+    if (sessionStorage["width2_fractions"] == width2_fractionsAnswer) {
+      score = score + 1;
+      points = 1;
+    }
+  }
+  console.log("A1 WIDTH2 SCORE: " + points + " of 1, TOTAL: " + score);
+  points = 0;
 
   // A1A has 3 available points
   score = score + scores.a1.a1a.tableScore;
-  console.log("A1A TABLE SCORE: " + score);
+  console.log("A1 PUZZLE SCORE: " + scores.a1.a1a.tableScore + " of 3, TOTAL: " + score);
 
   // A1B has 4 available points
   score = score + scores.a1.a1b.tableScore;
-  console.log("A1B TABLE SCORE: " + score);
+  console.log("A1 ASSEMBLY SCORE: " +  scores.a1.a1b.tableScore + " of 4, TOTAL: " + score);
 
   let a1TotalTime = scores.a1.a1b.tableTime+scores.a1.a1a.tableTime
   let a1TimeScore = getTimeScore(a1TotalTime);
-  console.log ("A1 Time " + a1TotalTime + ", " + a1TimeScore);
   a1TimeScore = (a1TimeScore/100) * A1_TOTAL_TIME_PTS;
-  console.log ("A1 Time Score " + a1TimeScore);
   score = score + a1TimeScore;
-  console.log("A1 SCORE: " + score);
+  console.log ("A1 TIME SCORE: " + a1TimeScore + " of " + A1_TOTAL_TIME_PTS + ", TOTAL " + score);
 
   return score;
 } // calculateA1Score
 
 function calculateA2Score() {
   let score = 0;
+  let  points = 0;
+
   if (sessionStorage["leftPocketCount"] == leftPocketCountAnswer) {
     score = score + 1;
+    points = 1;
   }
+  console.log("A2 POCKET #1 SCORE: " + points + " of 1, TOTAL: " + score);
+  points = 0;
+
   if (sessionStorage["centerPocketCount"] == centerPocketCountAnswer) {
     score = score + 1;
+    points = 1;
   }
+  console.log("A2 POCKET #2 SCORE: " + points + " of 1, TOTAL: " + score);
+  points = 0;
+
   if (sessionStorage["rightPocketCount"] == rightPocketCountAnswer) {
     score = score + 1;
+    points = 1;
   }
-  console.log("A2 POCKET SCORE: " + score);
+  console.log("A2 POCKET #3 SCORE: " + points + " of 1, TOTAL: " + score);
+  points = 0;
+
   // A2 has 7 available points
   score = score + scores.a2.tableScore;
-  console.log("A2 TABLE SCORE: " + score);
+  console.log("A2 TABLE SCORE: " +  scores.a2.tableScore + " of 7, TOTAL: " + score);
+
   let a2TimeScore = getTimeScore(scores.a2.tableTime);
-  console.log ("A2 Time " + scores.a2.tableTime + ", " +  a2TimeScore);
   a2TimeScore = (a2TimeScore/100) * A2_TOTAL_TIME_PTS;
-  console.log ("A2 Time Score " + a2TimeScore);
   score = score + a2TimeScore;
-  //score = score + getTimeScore(scores.a2.tableTime);
-  console.log("A2 SCORE: " + score);
+  console.log("A2 TIME SCORE: " + a2TimeScore + " of " + A2_TOTAL_TIME_PTS + ", TOTAL: " + score);
 
   return score;
 } // calculateA2Score
@@ -131,13 +150,11 @@ function calculateA3Score() {
 
   // A3 has 9 available points
   score = score + scores.a3.tableScore;
-  console.log("A3 TABLE SCORE: " + score);
+  console.log("A3 TABLE SCORE: " + scores.a3.tableScore + " of 9, TOTAL: " + score);
   let a3TimeScore = getTimeScore(scores.a3.tableTime);
-  console.log ("A3 Time " + scores.a3.tableTime + ", " +  a3TimeScore);
   a3TimeScore = (a3TimeScore/100) * A3_TOTAL_TIME_PTS;
-  console.log ("A3 Time Score " + a3TimeScore);
   score = score + a3TimeScore;
-  console.log("A3 SCORE: " + score);
+  console.log("A3 TIME SCORE: " + a3TimeScore + " of " + A3_TOTAL_TIME_PTS + ", TOTAL: " + score);
 
   return score;
 } // calculateA3Score
@@ -158,14 +175,17 @@ function getTimeScore(val) {
 
 function calculateScores() {
   // A1 Total
-  scores.a1.total = (calculateA1Score()/(A1_TOTAL_ASSESS_PTS + A1_TOTAL_TIME_PTS))*100;
-  scores.a2.total = (calculateA2Score()/(A2_TOTAL_ASSESS_PTS + A2_TOTAL_TIME_PTS))*100;
-  scores.a3.total = (calculateA3Score()/(A3_TOTAL_ASSESS_PTS + A3_TOTAL_TIME_PTS))*100;
+  let a1score = calculateA1Score();
+  let a2score = calculateA2Score();
+  let a3score = calculateA3Score();
+  scores.a1.total = (a1score/(A1_TOTAL_ASSESS_PTS + A1_TOTAL_TIME_PTS))*100;
+  scores.a2.total = (a2score/(A2_TOTAL_ASSESS_PTS + A2_TOTAL_TIME_PTS))*100;
+  scores.a3.total = (a3score/(A3_TOTAL_ASSESS_PTS + A3_TOTAL_TIME_PTS))*100;
 
-  console.log ("A1.TOTAL: " + scores.a1.total);
-  console.log ("A2.TOTAL: " + scores.a2.total);
-  console.log ("A3.TOTAL: " + scores.a3.total);
-  console.log("SCORES: " + JSON.stringify(scores));
+  console.log ("A1.TOTAL (" + a1score + "/" + (A1_TOTAL_ASSESS_PTS + A1_TOTAL_TIME_PTS) + "): " + scores.a1.total);
+  console.log ("A2.TOTAL (" + a2score + "/" + (A2_TOTAL_ASSESS_PTS + A2_TOTAL_TIME_PTS) + "): " + scores.a2.total);
+  console.log ("A3.TOTAL (" + a3score + "/" + (A3_TOTAL_ASSESS_PTS + A3_TOTAL_TIME_PTS) + "): " + scores.a3.total);
+  //console.log("SCORES: " + JSON.stringify(scores));
 } // calculateScores
 
 function displayScores() {
